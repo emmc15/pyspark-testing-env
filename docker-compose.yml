@@ -4,8 +4,8 @@ services:
   mariadb:
     container_name: mariadb-hive
     image: mariadb:latest
-    expose:
-      - 3306
+    ports:
+      - 3036:3306
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_USER: admin
@@ -30,7 +30,8 @@ services:
       - MINIO_ACCESS_KEY=accesskey
       - MINIO_SECRET_KEY=secretkey
     ports:
-      - 9000:9000
+      - 9000:9000 # api port
+      - 35703:35703 # console page port
     command: server /data
 
   spark-node:
@@ -42,7 +43,7 @@ services:
     volumes:
       - .:/workspace
     ports:
-      - 8000:8000
+      - 8888:8888
     depends_on:
       - hive-metastore
       - minio

@@ -16,4 +16,4 @@ RUN poetry config virtualenvs.create false && poetry install
 
 COPY . ./
 
-ENTRYPOINT [ "jupyter-lab" ]
+ENTRYPOINT [ "jupyter-lab", "--allow-root", "--ip=0.0.0.0"]
