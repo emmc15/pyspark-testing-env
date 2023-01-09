@@ -14,8 +14,10 @@ services:
 
   hive-metastore:
     container_name: hive-metastore
-    build: ./infra/hive.Dockerfile
     image: hive-metastore:latest
+    build:
+      context: .
+      dockerfile: ./infra/hive.Dockerfile
     expose:
       - 9083
     depends_on:
@@ -34,7 +36,9 @@ services:
   spark-node:
     container_name: spark-node
     image: spark-node:latest
-    build: ./infra/spark.Dockerfile
+    build:
+      context: .
+      dockerfile: ./infra/pyspark.Dockerfile
     volumes:
       - .:/workspace
     ports:
