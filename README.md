@@ -19,3 +19,9 @@ docker exec -it spark-node pytest .
 ### hive container
 
 ### minio container
+
+
+
+# Credit
+
+Thanks @[arempter](https://github.com/arempter) for inspriaing for this repo. Source used in this project can be found [here](https://github.com/arempter/hive-metastore-docker)
