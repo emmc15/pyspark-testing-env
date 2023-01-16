@@ -24,4 +24,4 @@ docker exec -it spark-node pytest .
 
 # Credit
 
-Thanks @[arempter](https://github.com/arempter) for inspriaing for this repo. Source used in this project can be found [here](https://github.com/arempter/hive-metastore-docker)
+Thanks @[arempter](https://github.com/arempter) for inspriaing for this repo. Source used in creating hive-metastore for this project can be found [here](https://github.com/arempter/hive-metastore-docker)
