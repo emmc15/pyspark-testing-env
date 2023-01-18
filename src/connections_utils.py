@@ -26,10 +26,10 @@ def create_docker_spark_builder(session_name: str="test") -> SparkSession.Builde
         .config("spark.ui.enabled", "false")
         .config("spark.driver.memory", "2g")
         # hive-metastore connection settings
-        .enableHiveSupport()
+        #.enableHiveSupport()
         .config("spark.sql.legacy.createHiveTableByDefault", "false")
         .config("hive.metastore.uris", "thrift://hive-metastore:9083")
-        .config("spark.sql.catalogImplementation", "hive")
+        #.config("spark.sql.catalogImplementation", "hive")
         .config("spark.hadoop.hive.hmshandler.retry.interval", "60")
         .config("spark.hadoop.hive.hmshandler.retry.attempts", "3")
         .config("spark.sql.warehouse.dir", "s3a://spark/warehouse/")
@@ -42,8 +42,8 @@ def create_docker_spark_builder(session_name: str="test") -> SparkSession.Builde
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
         .config("spark.hadoop.fs.s3a.attempts.maximum", "0")
         # Delta Config
-        .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-        .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+        # .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+        # .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
         # name of session
         .appName(session_name)
     )
