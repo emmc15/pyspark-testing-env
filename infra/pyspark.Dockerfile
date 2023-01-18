@@ -20,7 +20,8 @@ RUN poetry config virtualenvs.create false && poetry install ; \
     mv /hadoop-aws-${HADOOP_VERSION}.jar /opt/spark/jars/hadoop-aws-${HADOOP_VERSION}.jar ; \
     mv /aws-java-sdk-bundle-${AWS_JAVA_SDK_VERSION}.jar /opt/spark/jars/aws-java-sdk-bundle-${AWS_JAVA_SDK_VERSION}.jar
 
+COPY ./infra/hive-site.xml /opt/spark/conf/hive-site.xml
 COPY . ./
 
 ENV PYTHONPATH "/usr/local/lib/python${PYTHON_VERSION}/dist-packages:/usr/lib/python${PYTHON_VERSION}/site-packages:/usr/lib/python3/dist-packages"
-# ENTRYPOINT [ "jupyter-lab", "--allow-root", "--ip=0.0.0.0"]
+ENTRYPOINT [ "jupyter-lab", "--allow-root", "--ip=0.0.0.0"]
