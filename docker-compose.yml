@@ -3,7 +3,7 @@ version: "3"
 services:
   mariadb:
     container_name: mariadb-hive
-    image: mariadb:latest
+    image: mariadb:10.9.4
     ports:
       - 3036:3306
     environment:
@@ -11,18 +11,8 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
       MYSQL_DATABASE: metastore_db
-
-  hive-metastore:
-    container_name: hive-metastore
-    image: hive-metastore:latest
-    build:
-      context: .
-      dockerfile: ./infra/hive.Dockerfile
-    expose:
-      - 9083
-    depends_on:
-      - mariadb
-      - createbuckets
+    volumes:
+      - ./infra/hive-metastore-init.sql:/docker-entrypoint-initdb.d/hive-metastore-init.sql
 
   minio:
     container_name: minio
@@ -57,5 +47,5 @@ services:
     ports:
       - 8888:8888
     depends_on:
-      - hive-metastore
+      - mariadb
       - minio
