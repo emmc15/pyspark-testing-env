@@ -1,6 +1,6 @@
 # Pyspark Testing Env
 
-[Build and Test Status](https://github.com/emmc15/pyspark-testing-env/actions/workflows/push.yml/badge.svg)
+![Build and Test Status](https://github.com/emmc15/pyspark-testing-env/actions/workflows/push.yml/badge.svg)
 
 Example Repo to have full end-to-end pyspark testing via docker-compose that allows for the following:
 
