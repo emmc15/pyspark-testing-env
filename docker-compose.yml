@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  mariadb:
+    container_name: mariadb-hive
+    image: mariadb:10.9.4
+    ports:
+      - 3036:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: metastore_db
+    volumes:
+      - ./infra/hive-metastore-init.sql:/docker-entrypoint-initdb.d/hive-metastore-init.sql
+
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    environment:
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-accesskey}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-secretkey}
+    ports:
+      - 9000:9000 # api port
+      - 35703:35703 # console page port
+    command: server /data
+
+  createbuckets:
+    image: minio/mc
+    environment:
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-accesskey}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-secretkey}
+    volumes:
+      - ./infra/createbuckets-entrypoint.sh:/usr/bin/entrypoint.sh
+    entrypoint: /bin/sh /usr/bin/entrypoint.sh
+    depends_on:
+      - minio
+
+  spark-node:
+    container_name: spark-node
+    image: spark-node:latest
+    build:
+      context: .
+      dockerfile: ./infra/pyspark.Dockerfile
+    volumes:
+      - .:/workspace
+    ports:
+      - 8888:8888
+    depends_on:
+      - mariadb
+      - minio
