@@ -26,7 +26,6 @@ def create_docker_spark_builder(session_name: str="test") -> SparkSession.Builde
         .config("spark.ui.enabled", "false")
         .config("spark.driver.memory", "2g")
         # hive-metastore connection settings
-        #.enableHiveSupport()
         .config("spark.sql.legacy.createHiveTableByDefault", "false")
         # .config("hive.metastore.uris", "thrift://hive-metastore:9083")
         #.config("spark.sql.catalogImplementation", "hive")
