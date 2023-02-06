@@ -29,8 +29,11 @@ docker exec -it spark-node pytest .
 ## Folder Layout
 
 **infra**: Contains the docker-compose file and the dockerfiles for the spark and minio containers
+
 **src**: Contains the python code
+
 **tests**: Contains the example tests used for working with pyspark with either pytest or unittest
+
 **.github**: Contains the github actions workflow for running the tests on push
 
 
